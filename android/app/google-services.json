@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "529575409926",
+    "project_id": "architecture-997ef",
+    "storage_bucket": "architecture-997ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529575409926:android:6bda4c4d8eb79d7de80687",
+        "android_client_info": {
+          "package_name": "com.aykac.architecture"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH-U8XGjpEQXZVDnvJmlUTfxn-Q5Ymsgw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
