@@ -1,5 +1,6 @@
 import 'package:architecture/app/component/no_connection_view.dart';
 import 'package:architecture/app/utilities/connectivity/connectivity_controller.dart';
+import 'package:architecture/core/firebase/analytics/analytics_manager.dart';
 import 'package:architecture/core/mixins/connectivity_mixin.dart';
 import 'package:architecture/core/theme/core/theme_manager.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class _BaseViewState extends State<BaseView>
   @override
   void initState() {
     debugPrint("Show -- $widget");
+    AnalyticsManager.instance.logViewName('$widget');
 
     if (mounted) {
       widget.init();

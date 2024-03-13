@@ -3,9 +3,9 @@ import 'package:architecture/core/network/builder/network_manager.dart';
 bool? kApiReleaseMode = true;
 
 class NetworkClient {
-  NetworkClient._privateConstructor();
+  NetworkClient._init();
 
-  static final NetworkClient _instance = NetworkClient._privateConstructor();
+  static final NetworkClient _instance = NetworkClient._init();
 
   static NetworkClient get instance => _instance;
 
