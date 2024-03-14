@@ -10,7 +10,7 @@ class PostsService extends IPostsService {
   ResultDecode<List<Posts>, BaseNetworkErrorType> fethPosts() async {
     final client = await NetworkClient.instance.postsNetworkClient();
     final response = await client
-        .setRequestMethod(requestMethodEnum: RequestMethodEnum.POST)
+        .setRequestMethod(requestMethodEnum: RequestMethodEnum.GET)
         .setPath(path: 'posts')
         .setFunctionName(functionName: 'fethPosts')
         .execute<Posts, List<Posts>>(Posts());
