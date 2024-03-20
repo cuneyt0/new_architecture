@@ -27,7 +27,8 @@ class UsersViewModel extends BaseViewModel {
   List<PostsEntity>? filterData = [];
 
   Future<void> fetchUser() async {
-    resultState = const ResultState.idle();
+    resultState = const ResultState.pending();
+    notify();
     final result = await fetchUsers.call(params: 2);
     result?.when(
       success: (data) {
@@ -47,6 +48,7 @@ class UsersViewModel extends BaseViewModel {
 
   Future<void> fetchPosts() async {
     postsResultState = const ResultState.pending();
+
     final result = await fetchPostsUseCase.call(params: NoParams());
     result?.when(
       success: (data) {
