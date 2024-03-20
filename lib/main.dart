@@ -1,13 +1,11 @@
-import 'package:architecture/app/presentation/sign_in/viewmodel/sign_in_viewmodel.dart';
 import 'package:architecture/app/presentation/splash/view/splash_view.dart';
-import 'package:architecture/app/presentation/splash/viewmodel/splash_viewmodel.dart';
-import 'package:architecture/app/presentation/users/viewmodel/users_viewmodel.dart';
 import 'package:architecture/app/utilities/cache/cache_manager.dart';
 import 'package:architecture/app/utilities/connectivity/connectivity_controller.dart';
 import 'package:architecture/app/utilities/easy_localization/easy_localization_manager.dart';
 import 'package:architecture/core/firebase/analytics/analytics_manager.dart';
 import 'package:architecture/core/getIt/get_it.dart';
 import 'package:architecture/core/navigation/navigation.dart';
+import 'package:architecture/core/providers/providers.dart';
 import 'package:architecture/core/theme/core/theme_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -50,22 +48,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<ConnectivityController>(
-            create: (BuildContext context) =>
-                getIt.get<ConnectivityController>()),
-        ChangeNotifierProvider<UsersViewModel>(
-          create: (BuildContext context) => getIt.get<UsersViewModel>(),
-        ),
-        ChangeNotifierProvider<SignInViewModel>(
-          create: (BuildContext context) => getIt.get<SignInViewModel>(),
-        ),
-        ChangeNotifierProvider<SplashViewModel>(
-          create: (BuildContext context) => getIt.get<SplashViewModel>(),
-        ),
-        ChangeNotifierProvider<ThemeManager>(
-            create: (BuildContext context) => ThemeManager()),
-      ],
+      providers: Providers.providers,
       child: Consumer<ThemeManager>(builder: (context, consumer, child) {
         return MaterialApp(
             locale: context.locale,
