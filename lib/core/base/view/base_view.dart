@@ -1,4 +1,3 @@
-import 'package:architecture/app/component/no_connection_view.dart';
 import 'package:architecture/app/utilities/connectivity/connectivity_controller.dart';
 import 'package:architecture/core/firebase/analytics/analytics_manager.dart';
 import 'package:architecture/core/mixins/connectivity_mixin.dart';
@@ -45,8 +44,6 @@ class _BaseViewState extends State<BaseView>
 
   @override
   Widget build(BuildContext context) {
-    return currentConnection.hasConnection == false
-        ? const NoConnectionView()
-        : widget.startView(context, currentTheme, currentConnection);
+    return widget.startView(context, currentTheme, currentConnection);
   }
 }

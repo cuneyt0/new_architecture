@@ -39,7 +39,7 @@ class SignInView extends BaseView {
                     ),
                     ElevatedButton(
                         onPressed: () {
-                          consumer.signIn();
+                          consumer.signIn(context);
                         },
                         child: const Text("Giriş Yap")),
                     const Spacer(),

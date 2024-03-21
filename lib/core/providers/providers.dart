@@ -9,18 +9,18 @@ import 'package:provider/provider.dart';
 
 class Providers {
   static final providers = [
+    ChangeNotifierProvider<ThemeManager>(
+        create: (BuildContext context) => ThemeManager()),
     ChangeNotifierProvider<ConnectivityController>(
         create: (BuildContext context) => getIt.get<ConnectivityController>()),
+    ChangeNotifierProvider<SplashViewModel>(
+      create: (BuildContext context) => getIt.get<SplashViewModel>(),
+    ),
     ChangeNotifierProvider<UsersViewModel>(
       create: (BuildContext context) => getIt.get<UsersViewModel>(),
     ),
     ChangeNotifierProvider<SignInViewModel>(
       create: (BuildContext context) => getIt.get<SignInViewModel>(),
     ),
-    ChangeNotifierProvider<SplashViewModel>(
-      create: (BuildContext context) => getIt.get<SplashViewModel>(),
-    ),
-    ChangeNotifierProvider<ThemeManager>(
-        create: (BuildContext context) => ThemeManager()),
   ];
 }

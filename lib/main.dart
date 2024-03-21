@@ -1,10 +1,9 @@
-import 'package:architecture/app/presentation/splash/view/splash_view.dart';
 import 'package:architecture/app/utilities/cache/cache_manager.dart';
 import 'package:architecture/app/utilities/connectivity/connectivity_controller.dart';
 import 'package:architecture/app/utilities/easy_localization/easy_localization_manager.dart';
 import 'package:architecture/core/firebase/analytics/analytics_manager.dart';
 import 'package:architecture/core/getIt/get_it.dart';
-import 'package:architecture/core/navigation/navigation.dart';
+import 'package:architecture/core/navigation/app_navigation.dart';
 import 'package:architecture/core/providers/providers.dart';
 import 'package:architecture/core/theme/core/theme_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -49,16 +48,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: Providers.providers,
-      child: Consumer<ThemeManager>(builder: (context, consumer, child) {
-        return MaterialApp(
+      child: Consumer<ThemeManager>(
+        builder: (context, consumer, child) {
+          return MaterialApp.router(
             locale: context.locale,
             supportedLocales: context.supportedLocales,
             localizationsDelegates: context.localizationDelegates,
-            debugShowCheckedModeBanner: false,
-            navigatorKey: Navigation.navigatorKey,
+            routerConfig: AppNavigation.router,
             theme: consumer.current.theme,
-            home: SplashView());
-      }),
+            debugShowCheckedModeBanner: false,
+          );
+        },
+      ),
     );
   }
 }
