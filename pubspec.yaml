@@ -41,7 +41,7 @@ dependencies:
   go_router: ^13.2.1
   #Injectable
   injectable: ^2.3.5
-  provider_autodispose: ^2.0.0
+
 
 
 

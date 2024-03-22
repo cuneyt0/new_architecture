@@ -31,7 +31,7 @@ final class AppNavigation {
       //SignInView
       GoRoute(
         path: AppRoutes.signInView.path,
-        name: AppRoutes.signInView.path,
+        name: AppRoutes.signInView.name,
         builder: (context, state) => SignInView(
           key: state.pageKey,
         ),
@@ -56,7 +56,7 @@ final class AppNavigation {
                   //Sub Sub View
                   GoRoute(
                     path: AppRoutes.subsubUserView.path,
-                    name: AppRoutes.subsubUserView.path,
+                    name: AppRoutes.subsubUserView.name,
                     builder: (context, state) => SubSubView(
                       key: state.pageKey,
                     ),

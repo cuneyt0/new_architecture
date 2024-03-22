@@ -1,5 +1,7 @@
 import 'package:architecture/app/utilities/connectivity/connectivity_controller.dart';
+import 'package:architecture/core/base/viewmodel/base_viewmodel.dart';
 import 'package:architecture/core/firebase/analytics/analytics_manager.dart';
+import 'package:architecture/core/getIt/injection.dart';
 import 'package:architecture/core/mixins/connectivity_mixin.dart';
 import 'package:architecture/core/theme/core/theme_manager.dart';
 import 'package:flutter/material.dart';

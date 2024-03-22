@@ -25,7 +25,7 @@ class UsersView extends BaseView {
 
   @override
   void dispose() {
-    _viewModel.dispose();
+
   }
 
   @override
