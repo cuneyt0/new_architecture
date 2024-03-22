@@ -39,22 +39,24 @@ dependencies:
   firebase_analytics: ^10.8.9
   firebase_crashlytics: ^3.4.19
   go_router: ^13.2.1
-  
-  
+  #Injectable
+  injectable: ^2.3.5
+  provider_autodispose: ^2.0.0
+
+
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
 
-  
+
   flutter_lints: ^3.0.1
   build_runner: ^2.4.7
   flutter_gen_runner: ^5.4.0
   json_serializable: ^6.7.1
+  injectable_generator: ^2.5.0
 
 flutter_gen:
-  output: lib/gen/ 
-  line_length: 80 
+  output: lib/gen/
+  line_length: 80
 
   integrations:
     flutter_svg: true
@@ -69,19 +71,19 @@ flutter_gen:
 
 flutter:
 
- 
+
   uses-material-design: true
 
- 
+
   assets:
     - assets/images/
     - assets/color/
     - assets/fonts/
     - assets/icons/
     - assets/localizable/
-    
 
- 
+
+
 
 
   # example:

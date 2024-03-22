@@ -3,7 +3,9 @@ import 'package:architecture/app/domain/users/repository/i_users_repository.dart
 import 'package:architecture/core/base/base_network_error_type.dart';
 import 'package:architecture/core/base/base_network_type_def.dart';
 import 'package:architecture/core/network/interfaces/base_use_case.dart';
+import 'package:injectable/injectable.dart';
 
+@Singleton()
 class FetchUsers implements BaseParamsUseCase<UsersEntity, int> {
   final IUsersRepository iDomainUsersRepository;
 

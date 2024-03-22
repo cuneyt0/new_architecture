@@ -2,10 +2,11 @@ import 'package:architecture/app/presentation/sign_in/viewmodel/sign_in_viewmode
 import 'package:architecture/app/presentation/splash/viewmodel/splash_viewmodel.dart';
 import 'package:architecture/app/presentation/users/viewmodel/users_viewmodel.dart';
 import 'package:architecture/app/utilities/connectivity/connectivity_controller.dart';
-import 'package:architecture/core/getIt/get_it.dart';
 import 'package:architecture/core/theme/core/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../getIt/injection.dart';
 
 class Providers {
   static final providers = [

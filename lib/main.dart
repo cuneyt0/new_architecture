@@ -2,7 +2,7 @@ import 'package:architecture/app/utilities/cache/cache_manager.dart';
 import 'package:architecture/app/utilities/connectivity/connectivity_controller.dart';
 import 'package:architecture/app/utilities/easy_localization/easy_localization_manager.dart';
 import 'package:architecture/core/firebase/analytics/analytics_manager.dart';
-import 'package:architecture/core/getIt/get_it.dart';
+import 'package:architecture/core/getIt/injection.dart';
 import 'package:architecture/core/navigation/app_navigation.dart';
 import 'package:architecture/core/providers/providers.dart';
 import 'package:architecture/core/theme/core/theme_manager.dart';
@@ -16,22 +16,21 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
+
   await GetStorage.init();
   // MARK: - Hive Init
   await HiveHelper.shared.setupHive();
   // MARK: - GetIt Init
-  setupGetIT();
   // MARK: - Localizable Init
   await EasyLocalization.ensureInitialized();
 
-  getIt.get<ConnectivityController>().firstCheck();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
   AnalyticsManager.instance.logAppOpen();
-
   runApp(
     EasyLocalization(
       path: EasyLocalizationManager.path,

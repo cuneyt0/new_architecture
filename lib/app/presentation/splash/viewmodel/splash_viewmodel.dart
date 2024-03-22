@@ -4,15 +4,17 @@ import 'package:architecture/core/base/viewmodel/base_viewmodel.dart';
 import 'package:architecture/core/navigation/app_navigation.dart';
 import 'package:architecture/core/navigation/app_routes.dart';
 import 'package:go_router/go_router.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton()
 class SplashViewModel extends BaseViewModel {
   Future<void> init() async {
     SignIn? user = _checkUser();
     user == null
         ? AppNavigation.navigatorKey.currentState?.context
-            .goNamed(AppRoutes.signInView.name)
+            .goNamed(AppRoutes.signInView.path)
         : AppNavigation.navigatorKey.currentState?.context
-            .goNamed(AppRoutes.usersView.name);
+            .goNamed(AppRoutes.usersView.path);
   }
 
   SignIn? _checkUser() {

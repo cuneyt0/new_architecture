@@ -6,7 +6,9 @@ import 'package:architecture/core/base/base_network_error_type.dart';
 import 'package:architecture/core/base/base_network_type_def.dart';
 import 'package:architecture/core/network/interfaces/base_use_case.dart';
 import 'package:architecture/core/result/result.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable(as:ISignInRepository)
 class SignInRepository implements ISignInRepository {
   final ISignInService iSignInService;
 

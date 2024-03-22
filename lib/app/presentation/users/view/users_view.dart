@@ -6,7 +6,6 @@ import 'package:architecture/app/domain/users/entity/users_entity.dart';
 import 'package:architecture/app/presentation/users/viewmodel/users_viewmodel.dart';
 import 'package:architecture/app/utilities/connectivity/connectivity_controller.dart';
 import 'package:architecture/core/base/view/base_view.dart';
-import 'package:architecture/core/getIt/get_it.dart';
 import 'package:architecture/core/navigation/app_routes.dart';
 import 'package:architecture/core/result_state_builder/result_state_builder.dart';
 import 'package:architecture/core/results/result_state.dart';
@@ -14,6 +13,8 @@ import 'package:architecture/core/theme/core/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+
+import '../../../../core/getIt/injection.dart';
 
 part '../widgets/_appbar.dart';
 part '../widgets/_searchbody.dart';
@@ -23,7 +24,9 @@ class UsersView extends BaseView {
   final UsersViewModel _viewModel = getIt.get<UsersViewModel>();
 
   @override
-  void dispose() {}
+  void dispose() {
+    _viewModel.dispose();
+  }
 
   @override
   void init() {

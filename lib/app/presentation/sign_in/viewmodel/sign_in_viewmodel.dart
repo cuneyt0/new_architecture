@@ -12,7 +12,9 @@ import 'package:architecture/core/navigation/app_routes.dart';
 import 'package:architecture/core/results/result_state.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:injectable/injectable.dart';
 
+@Singleton()
 class SignInViewModel extends BaseViewModel {
   final SignInWithParamsUseCase signInWithParamsUseCase;
   final SignInUseCase signInUseCase;
@@ -34,7 +36,7 @@ class SignInViewModel extends BaseViewModel {
         resultState = ResultState.completed(data);
         await _saveHive(data: data);
         if (context.mounted) {
-          context.goNamed(AppRoutes.usersView.name);
+          context.goNamed(AppRoutes.usersView.path);
         } else {}
       },
       failure: (error) {

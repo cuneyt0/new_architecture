@@ -4,7 +4,9 @@ import 'package:architecture/app/domain/users/repository/i_users_repository.dart
 import 'package:architecture/core/base/base_network_error_type.dart';
 import 'package:architecture/core/base/base_network_type_def.dart';
 import 'package:architecture/core/result/result.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable(as: IUsersRepository)
 class UsersRepository implements IUsersRepository {
   final IUsersService iUsersService;
 

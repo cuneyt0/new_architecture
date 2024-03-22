@@ -6,7 +6,9 @@ import 'package:architecture/core/base/base_network_error_type.dart';
 import 'package:architecture/core/base/base_network_type_def.dart';
 import 'package:architecture/core/network/enum/request_method_enum.dart';
 import 'package:architecture/core/network/interfaces/base_use_case.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable(as: ISignInService)
 class SignInService implements ISignInService {
   @override
   ResultDecode<SignIn, BaseNetworkErrorType> signIn(

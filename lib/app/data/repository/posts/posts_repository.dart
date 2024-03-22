@@ -4,7 +4,9 @@ import 'package:architecture/app/domain/posts/repository/i_posts_repository.dart
 import 'package:architecture/core/base/base_network_error_type.dart';
 import 'package:architecture/core/base/base_network_type_def.dart';
 import 'package:architecture/core/result/result.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable(as: IPostsRepository)
 class PostsRepository extends IPostsRepository {
   final IPostsService postsService;
   PostsRepository({required this.postsService});

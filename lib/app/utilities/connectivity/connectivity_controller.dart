@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 
+@Singleton()
 class ConnectivityController extends ChangeNotifier {
   late final Connectivity connectivity;
   ConnectivityController() {

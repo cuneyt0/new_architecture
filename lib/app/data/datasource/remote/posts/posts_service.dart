@@ -4,7 +4,9 @@ import 'package:architecture/app/data/model/response/posts/posts.dart';
 import 'package:architecture/core/base/base_network_error_type.dart';
 import 'package:architecture/core/base/base_network_type_def.dart';
 import 'package:architecture/core/network/enum/request_method_enum.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable(as: IPostsService)
 class PostsService extends IPostsService {
   @override
   ResultDecode<List<Posts>, BaseNetworkErrorType> fethPosts() async {

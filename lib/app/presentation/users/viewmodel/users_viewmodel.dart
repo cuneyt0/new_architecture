@@ -10,7 +10,9 @@ import 'package:architecture/core/network/interfaces/base_use_case.dart';
 import 'package:architecture/core/results/result_state.dart';
 import 'package:architecture/core/theme/core/theme_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton()
 class UsersViewModel extends BaseViewModel {
   final FetchUsers fetchUsers;
   final FetchPostsUseCase fetchPostsUseCase;
