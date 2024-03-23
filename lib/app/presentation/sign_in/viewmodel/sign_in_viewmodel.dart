@@ -9,7 +9,7 @@ import 'package:architecture/core/error/sw_error.dart';
 import 'package:architecture/core/error/view_error.dart';
 import 'package:architecture/core/navigation/app_navigation.dart';
 import 'package:architecture/core/navigation/app_routes.dart';
-import 'package:architecture/core/results/result_state.dart';
+import 'package:architecture/core/results/view_state.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
@@ -20,7 +20,7 @@ class SignInViewModel extends BaseViewModel {
   final SignInUseCase signInUseCase;
   SignInViewModel(
       {required this.signInWithParamsUseCase, required this.signInUseCase});
-  ResultState<SignInEntity, SwError> resultState = const ResultState.idle();
+  ViewState<SignInEntity, SwError> resultState = const ViewState.idle();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   SignInRequestModel? signInRequestModel = SignInRequestModel();
@@ -28,12 +28,12 @@ class SignInViewModel extends BaseViewModel {
   Future<void> signIn(BuildContext context) async {
     signInRequestModel = SignInRequestModel(
         email: emailController.text, password: passwordController.text);
-    resultState = const ResultState.idle();
+    resultState = const ViewState.idle();
     final result = await signInUseCase.call(params: signInRequestModel);
 
     result?.when(
       success: (data) async {
-        resultState = ResultState.completed(data);
+        resultState = ViewState.completed(data);
         await _saveHive(data: data);
         if (context.mounted) {
           context.goNamed(AppRoutes.usersView.path);
@@ -44,7 +44,7 @@ class SignInViewModel extends BaseViewModel {
             .showSnackBar(SnackBar(
           content: Text('${error.handleError.error}'),
         ));
-        return ResultState.failed(ViewError(error: error.handleError.error));
+        return ViewState.failed(ViewError(error: error.handleError.error));
       },
     );
 

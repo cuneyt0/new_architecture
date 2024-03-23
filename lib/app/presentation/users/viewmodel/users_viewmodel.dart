@@ -7,7 +7,7 @@ import 'package:architecture/core/error/sw_error.dart';
 import 'package:architecture/core/firebase/analytics/analytics_manager.dart';
 import 'package:architecture/core/firebase/crashlytics/crashlytics_manager.dart';
 import 'package:architecture/core/network/interfaces/base_use_case.dart';
-import 'package:architecture/core/results/result_state.dart';
+import 'package:architecture/core/results/view_state.dart';
 import 'package:architecture/core/theme/core/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
@@ -17,28 +17,28 @@ class UsersViewModel extends BaseViewModel {
   final FetchUsers fetchUsers;
   final FetchPostsUseCase fetchPostsUseCase;
   UsersViewModel({required this.fetchUsers, required this.fetchPostsUseCase});
-  ResultState<UsersEntity, SwError> resultState = const ResultState.idle();
+  ViewState<UsersEntity, SwError> resultState = const ViewState.idle();
   bool get isSearch => _isSearch;
   bool _isSearch = false;
 
   TextEditingController searchController = TextEditingController();
-  ResultState<List<PostsEntity>, SwError> postsResultState =
-      const ResultState.idle();
+  ViewState<List<PostsEntity>, SwError> postsResultState =
+      const ViewState.idle();
 
   List<PostsEntity> _searchResults = [];
   List<PostsEntity>? filterData = [];
 
   Future<void> fetchUser() async {
-    resultState = const ResultState.pending();
+    resultState = const ViewState.pending();
     notify();
     final result = await fetchUsers.call(params: 2);
     result?.when(
       success: (data) {
-        resultState = ResultState.completed(data);
+        resultState = ViewState.completed(data);
       },
       failure: (error) {
         debugPrint(error.localizedErrorMessage);
-        resultState = ResultState.failed(
+        resultState = ViewState.failed(
             SwError(errorMessage: error.localizedErrorMessage));
       },
     );
@@ -49,16 +49,16 @@ class UsersViewModel extends BaseViewModel {
   }
 
   Future<void> fetchPosts() async {
-    postsResultState = const ResultState.pending();
+    postsResultState = const ViewState.pending();
 
     final result = await fetchPostsUseCase.call(params: NoParams());
     result?.when(
       success: (data) {
-        postsResultState = ResultState.completed(data);
+        postsResultState = ViewState.completed(data);
         _searchResults = data;
       },
       failure: (error) async {
-        postsResultState = ResultState.failed(
+        postsResultState = ViewState.failed(
             SwError(errorMessage: error.localizedErrorMessage));
         await CrashlyticsManager.instance.sendACrash(
             error: error.localizedErrorMessage,

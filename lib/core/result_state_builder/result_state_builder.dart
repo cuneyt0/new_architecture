@@ -1,10 +1,10 @@
-import 'package:architecture/core/results/result_state.dart';
+import 'package:architecture/core/results/view_state.dart';
 import 'package:flutter/material.dart';
 
 typedef CompletedWidget<T> = Widget Function(T);
 
 class ResultStateBuilder<T, E extends Exception> extends StatelessWidget {
-  final ResultState<T, E> resultState;
+  final ViewState<T, E> resultState;
   final CompletedWidget<T> completed;
   const ResultStateBuilder(
       {super.key, required this.resultState, required this.completed});

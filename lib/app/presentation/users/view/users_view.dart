@@ -8,7 +8,7 @@ import 'package:architecture/app/utilities/connectivity/connectivity_controller.
 import 'package:architecture/core/base/view/base_view.dart';
 import 'package:architecture/core/navigation/app_routes.dart';
 import 'package:architecture/core/result_state_builder/result_state_builder.dart';
-import 'package:architecture/core/results/result_state.dart';
+import 'package:architecture/core/results/view_state.dart';
 import 'package:architecture/core/theme/core/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -79,9 +79,9 @@ class UsersView extends BaseView<UsersViewModel> {
     );
   }
 
-  Selector<UsersViewModel, ResultState<dynamic, Exception>> _posts(
+  Selector<UsersViewModel, ViewState<dynamic, Exception>> _posts(
       UsersViewModel consumer) {
-    return Selector<UsersViewModel, ResultState>(
+    return Selector<UsersViewModel, ViewState>(
       builder: (context, value, child) {
         return ResultStateBuilder(
           resultState: consumer.postsResultState,
@@ -102,9 +102,9 @@ class UsersView extends BaseView<UsersViewModel> {
     );
   }
 
-  Selector<UsersViewModel, ResultState<dynamic, Exception>> _users(
+  Selector<UsersViewModel, ViewState<dynamic, Exception>> _users(
       UsersViewModel consumer) {
-    return Selector<UsersViewModel, ResultState>(
+    return Selector<UsersViewModel, ViewState>(
       builder: (context, value, child) {
         print("Rebuild Users");
         return ResultStateBuilder(
