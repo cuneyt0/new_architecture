@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:architecture/app/data/datasource/local/application/application_local_datasource.dart';
 import 'package:architecture/app/data/model/response/sign_in/sign_in.dart';
+import 'package:architecture/core/getIt/injection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -6,7 +10,7 @@ class HiveHelper {
   static HiveHelper shared = HiveHelper();
   static const userKey = 'userKey';
   static const userBoxKey = 'userBoxKey';
-
+  ApplicationLocalDataSource applicationLocalDataSource = getIt.get<ApplicationLocalDataSource>();
   Future<void> setupHive() async {
     await Hive.initFlutter();
     // Register TypeAdapters
@@ -16,7 +20,11 @@ class HiveHelper {
   }
 
   Future<void> _openBox() async {
-    await Hive.openBox<SignIn>(userBoxKey);
+    if(await applicationLocalDataSource.getSecureKey() == null){
+      applicationLocalDataSource.saveSecureKey(Hive.generateSecureKey());
+    }
+    final encryptionKeyUint8List = base64Url.decode(await applicationLocalDataSource.getSecureKey()??"");
+    await Hive.openBox<SignIn>(userBoxKey,encryptionCipher: HiveAesCipher(encryptionKeyUint8List));
   }
 
   void _initTypeAdapters() {

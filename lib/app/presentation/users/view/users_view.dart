@@ -29,9 +29,7 @@ class UsersView extends BaseView<UsersViewModel> {
 
   @override
   void init() {
-    viewModel
-      ..fetchUser()
-      ..fetchPosts();
+    viewModel.fetchUser();
   }
 
   @override

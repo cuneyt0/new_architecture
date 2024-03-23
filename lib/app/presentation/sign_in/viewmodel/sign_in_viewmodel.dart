@@ -36,7 +36,7 @@ class SignInViewModel extends BaseViewModel {
         resultState = ViewState.completed(data);
         await _saveHive(data: data);
         if (context.mounted) {
-          context.goNamed(AppRoutes.usersView.path);
+          context.goNamed(AppRoutes.usersView.name);
         } else {}
       },
       failure: (error) {

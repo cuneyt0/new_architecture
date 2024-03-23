@@ -1,9 +1,10 @@
 import 'dart:io';
 
+import 'package:architecture/app/data/datasource/local/application/application_local_datasource.dart';
 import 'package:architecture/core/base/base_network_error_type.dart';
 import 'package:architecture/core/base/base_network_type_def.dart';
 import 'package:architecture/core/getIt/injection.dart';
-import 'package:architecture/core/network/builder/dio_manager.dart';
+import 'package:architecture/core/network/builder/third_party_managers.dart';
 import 'package:architecture/core/network/interfaces/base_network_model.dart';
 import 'package:architecture/core/network/layers/network_connectivity.dart';
 import 'package:architecture/core/network/layers/network_decoding.dart';
@@ -18,7 +19,9 @@ import 'network_manager.dart';
 
 @Injectable(as: NetworkManager)
 class NetworkManagerImpl extends NetworkManager {
-  final Dio _dio = getIt.get<DioManager>().dio;
+  final Dio _dio = getIt.get<ThirdPartyManagers>().dio;
+  final ApplicationLocalDataSource _userLocalDataSource =
+      getIt.get<ApplicationLocalDataSource>();
   Map<String, dynamic>? _queryParameter;
   Map<String, dynamic>? _bodyJson;
   Map<String, dynamic>? _header;
@@ -69,7 +72,8 @@ class NetworkManagerImpl extends NetworkManager {
       T responseModel) async {
     if (await NetworkConnectivity.status) {
       try {
-        _dio.interceptors.add(AuthorizationInterceptor(dio: _dio));
+        _dio.interceptors.add(AuthorizationInterceptor(
+            userLocalDataSource: _userLocalDataSource, dio: _dio));
         _dio.options.connectTimeout = const Duration(seconds: 20);
         _dio.options.receiveTimeout = const Duration(seconds: 10);
         _dio.interceptors.add(PrettyDioLogger(

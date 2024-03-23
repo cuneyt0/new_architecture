@@ -1,16 +1,23 @@
 import 'package:dio/dio.dart';
 
+import '../../../app/data/datasource/local/application/application_local_datasource.dart';
+
 class AuthorizationInterceptor extends Interceptor {
   final Dio _dio;
+  final ApplicationLocalDataSource _userLocalDataSource;
 
-  AuthorizationInterceptor({required Dio dio}) : _dio = dio;
+  AuthorizationInterceptor(
+      {required Dio dio,
+      required ApplicationLocalDataSource userLocalDataSource})
+      : _dio = dio,
+        _userLocalDataSource = userLocalDataSource;
 
   @override
   Future<void> onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     options.headers.addAll({
       "Content-Type": "application/json",
-      "Authorization": "Bearer ",
+      "Authorization": await _userLocalDataSource.getAuthorizationKey(),
       "app-language": "eng",
     });
     // get token from the storage
