@@ -19,9 +19,8 @@ import '../../../../core/getIt/injection.dart';
 part '../widgets/_appbar.dart';
 part '../widgets/_searchbody.dart';
 
-class UsersView extends BaseView {
+class UsersView extends BaseView<UsersViewModel> {
   UsersView({super.key});
-  final UsersViewModel _viewModel = getIt.get<UsersViewModel>();
 
   @override
   void dispose() {
@@ -30,7 +29,7 @@ class UsersView extends BaseView {
 
   @override
   void init() {
-    _viewModel
+    viewModel
       ..fetchUser()
       ..fetchPosts();
   }
@@ -41,9 +40,9 @@ class UsersView extends BaseView {
     return connectivity.hasConnection == false
         ? const NoConnectionView()
         : Scaffold(
-            appBar: _appbar(_viewModel),
+            appBar: _appbar(viewModel),
             floatingActionButton: FloatingActionButton(onPressed: () async {
-              await _viewModel.fetchPosts();
+              await viewModel.fetchPosts();
 
               /**
          *   await CrashlyticsManager.instance.sendACrash(
@@ -65,7 +64,7 @@ class UsersView extends BaseView {
                 selector: (_, provider) =>
                     provider.searchController.text.isNotEmpty,
                 builder: (context, value, child) {
-                  return value ? _searchbody() : _body(_viewModel, context);
+                  return value ? _searchbody() : _body(viewModel, context);
                 }),
           );
   }

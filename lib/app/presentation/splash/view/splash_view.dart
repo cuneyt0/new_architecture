@@ -7,19 +7,18 @@ import 'package:flutter/scheduler.dart';
 
 import '../../../../core/getIt/injection.dart';
 
-class SplashView extends BaseView {
-  final SplashViewModel _viewModel = getIt.get<SplashViewModel>();
+class SplashView extends BaseView<SplashViewModel> {
 
   SplashView({super.key});
   @override
   void dispose() {
-    _viewModel.dispose();
+
   }
 
   @override
   void init() async {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await _viewModel.init();
+      await viewModel.init();
     });
   }
 
@@ -32,4 +31,6 @@ class SplashView extends BaseView {
       ),
     );
   }
+
+
 }

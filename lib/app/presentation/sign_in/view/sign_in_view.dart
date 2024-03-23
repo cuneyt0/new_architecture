@@ -5,8 +5,9 @@ import 'package:architecture/core/theme/core/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SignInView extends BaseView {
-  const SignInView({super.key});
+class SignInView extends BaseView<SignInViewModel> {
+  SignInView({super.key});
+
 
   @override
   void dispose() {}

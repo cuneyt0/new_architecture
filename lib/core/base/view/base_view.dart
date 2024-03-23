@@ -8,13 +8,19 @@ import 'package:flutter/material.dart';
 
 import '../../../core/mixins/theme_mixin.dart';
 
-abstract class BaseView extends StatefulWidget {
+abstract class BaseView<T extends BaseViewModel> extends StatefulWidget {
+  final T viewModel = getIt.get<T>();
+
   Widget startView(BuildContext context, ThemeManager theme,
       ConnectivityController connectivity);
   void init();
   void dispose();
+  void resetViewModel(){
+    getIt.resetLazySingleton<T>();
+    viewModel.dispose();
+  }
+  BaseView({super.key});
 
-  const BaseView({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -40,6 +46,7 @@ class _BaseViewState extends State<BaseView>
     super.dispose();
     debugPrint("Close -- $widget");
     if (mounted) {
+      widget.resetViewModel();
       widget.dispose();
     }
   }

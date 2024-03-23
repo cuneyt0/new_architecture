@@ -6,20 +6,15 @@ import 'package:architecture/core/theme/core/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/getIt/injection.dart';
 import '../viewmodel/user_sub_viewmodel.dart';
 
-class SubUsersView extends BaseView {
+class SubUsersView extends BaseView<SubUserViewModel> {
   final SignInDataEntity? data;
-  final SubUserViewModel _viewModel = getIt.get<SubUserViewModel>();
 
-   SubUsersView({super.key, required this.data});
-
+  SubUsersView({super.key, required this.data});
 
   @override
-  void dispose() {
-    getIt.resetLazySingleton<SubUserViewModel>();
-  }
+  void dispose() {}
 
   @override
   void init() {}
