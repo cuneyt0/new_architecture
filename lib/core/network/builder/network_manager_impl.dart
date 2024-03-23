@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:architecture/app/client/dio_manager.dart';
+import 'package:architecture/core/network/builder/dio_manager.dart';
 import 'package:architecture/core/base/base_network_error_type.dart';
 import 'package:architecture/core/base/base_network_type_def.dart';
 import 'package:architecture/core/getIt/injection.dart';
@@ -10,29 +10,22 @@ import 'package:architecture/core/network/layers/network_decoding.dart';
 import 'package:architecture/core/result/result.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import '../enum/request_content_type_enum.dart';
+import '../interceptors/authorization_interceptor.dart';
 import '../enum/request_method_enum.dart';
 import 'network_manager.dart';
 
 @Injectable(as: NetworkManager)
 class NetworkManagerImpl extends NetworkManager {
-  final Dio _dio = getIt.get<DioManager>().getDio();
+  final Dio _dio = getIt.get<DioManager>().dio;
   Map<String, dynamic>? _queryParameter;
   Map<String, dynamic>? _bodyJson;
-  RequestContentTypeEnum? _contentTypeEnum;
   FormData? _formData;
   RequestMethodEnum? _requestMethodEnum;
   String? _path;
-  ResponseType? _responseType;
 
 
-  @override
-  NetworkManager setContentType(
-      {required RequestContentTypeEnum contentTypeEnum}) {
-    _contentTypeEnum = contentTypeEnum;
-    return this;
-  }
 
   @override
   NetworkManager setPath({required String path}) {
@@ -68,23 +61,27 @@ class NetworkManagerImpl extends NetworkManager {
 
 
   @override
-  NetworkManager setResponseTYPE({required ResponseType responseType}) {
-    _responseType = responseType;
-    return this;
-  }
-
-  @override
   ResultDecode<K, BaseNetworkErrorType> execute<T extends BaseNetworkModel, K>(
       T responseModel) async {
     if (await NetworkConnectivity.status) {
       try {
+        _dio.interceptors.add(
+            AuthorizationInterceptor(dio: _dio));
+        _dio.options.connectTimeout = const Duration(seconds: 20);
+        _dio.options.receiveTimeout = const Duration(seconds: 10);
+        _dio.interceptors.add(PrettyDioLogger(
+            requestHeader: true,
+            requestBody: true,
+            responseBody: true,
+            responseHeader: false,
+            error: true,
+            compact: true,
+            maxWidth: 90));
         final response = await _dio.fetch(RequestOptions(
             path: _path ?? '',
             method: _requestMethodEnum?.rawValue,
             data: _formData ?? _bodyJson,
             baseUrl: "https://reqres.in/",
-            contentType: _contentTypeEnum?.rawValue,
-            responseType: _responseType ?? ResponseType.json,
             queryParameters: _queryParameter,
             validateStatus: (statusCode) =>
                 statusCode! >= HttpStatus.ok &&

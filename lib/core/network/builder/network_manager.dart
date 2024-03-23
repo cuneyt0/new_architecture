@@ -11,9 +11,6 @@ abstract class NetworkManager {
   NetworkManager setRequestMethod(
       {required RequestMethodEnum requestMethodEnum});
 
-  NetworkManager setContentType(
-      {required RequestContentTypeEnum contentTypeEnum});
-
   ResultDecode<K, BaseNetworkErrorType> execute<T extends BaseNetworkModel, K>(
       T responseModel);
 
@@ -25,6 +22,4 @@ abstract class NetworkManager {
 
   NetworkManager setBodyFormData({FormData? formData});
 
-
-  NetworkManager setResponseTYPE({required ResponseType responseType});
 }

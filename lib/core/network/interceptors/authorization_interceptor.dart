@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 
-class DioInterceptor extends Interceptor {
+class AuthorizationInterceptor extends Interceptor {
   final Dio _dio;
 
-  DioInterceptor({required Dio dio}) : _dio = dio;
+  AuthorizationInterceptor({required Dio dio}) : _dio = dio;
 
   @override
   Future<void> onRequest(
