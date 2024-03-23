@@ -22,4 +22,6 @@ abstract class NetworkManager {
 
   NetworkManager setBodyFormData({FormData? formData});
 
+  NetworkManager setHeaders({required Map<String, dynamic> header});
+
 }

@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:architecture/core/network/builder/dio_manager.dart';
 import 'package:architecture/core/base/base_network_error_type.dart';
 import 'package:architecture/core/base/base_network_type_def.dart';
 import 'package:architecture/core/getIt/injection.dart';
+import 'package:architecture/core/network/builder/dio_manager.dart';
 import 'package:architecture/core/network/interfaces/base_network_model.dart';
 import 'package:architecture/core/network/layers/network_connectivity.dart';
 import 'package:architecture/core/network/layers/network_decoding.dart';
@@ -12,8 +12,8 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import '../interceptors/authorization_interceptor.dart';
 import '../enum/request_method_enum.dart';
+import '../interceptors/authorization_interceptor.dart';
 import 'network_manager.dart';
 
 @Injectable(as: NetworkManager)
@@ -21,11 +21,10 @@ class NetworkManagerImpl extends NetworkManager {
   final Dio _dio = getIt.get<DioManager>().dio;
   Map<String, dynamic>? _queryParameter;
   Map<String, dynamic>? _bodyJson;
+  Map<String, dynamic>? _header;
   FormData? _formData;
   RequestMethodEnum? _requestMethodEnum;
   String? _path;
-
-
 
   @override
   NetworkManager setPath({required String path}) {
@@ -59,14 +58,18 @@ class NetworkManagerImpl extends NetworkManager {
     return this;
   }
 
+  @override
+  NetworkManager setHeaders({required Map<String, dynamic> header}) {
+    _header = header;
+    return this;
+  }
 
   @override
   ResultDecode<K, BaseNetworkErrorType> execute<T extends BaseNetworkModel, K>(
       T responseModel) async {
     if (await NetworkConnectivity.status) {
       try {
-        _dio.interceptors.add(
-            AuthorizationInterceptor(dio: _dio));
+        _dio.interceptors.add(AuthorizationInterceptor(dio: _dio));
         _dio.options.connectTimeout = const Duration(seconds: 20);
         _dio.options.receiveTimeout = const Duration(seconds: 10);
         _dio.interceptors.add(PrettyDioLogger(
@@ -82,6 +85,7 @@ class NetworkManagerImpl extends NetworkManager {
             method: _requestMethodEnum?.rawValue,
             data: _formData ?? _bodyJson,
             baseUrl: "https://reqres.in/",
+            headers: _header,
             queryParameters: _queryParameter,
             validateStatus: (statusCode) =>
                 statusCode! >= HttpStatus.ok &&
