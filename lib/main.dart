@@ -1,5 +1,4 @@
 import 'package:architecture/app/utilities/cache/cache_manager.dart';
-import 'package:architecture/app/utilities/connectivity/connectivity_controller.dart';
 import 'package:architecture/app/utilities/easy_localization/easy_localization_manager.dart';
 import 'package:architecture/core/firebase/analytics/analytics_manager.dart';
 import 'package:architecture/core/getIt/injection.dart';
@@ -16,15 +15,15 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // MARK: - GetIt Init
   configureDependencies();
 
   await GetStorage.init();
   // MARK: - Hive Init
   await HiveHelper.shared.setupHive();
-  // MARK: - GetIt Init
+
   // MARK: - Localizable Init
   await EasyLocalization.ensureInitialized();
-
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

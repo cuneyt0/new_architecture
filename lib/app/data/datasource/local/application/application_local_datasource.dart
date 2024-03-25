@@ -1,7 +1,7 @@
-abstract class ApplicationLocalDataSource{
-  void saveAuthorizationKey(String key);
+abstract class ApplicationLocalDataSource {
+  Future<void> saveAuthorizationKey(String key);
   Future<String> getAuthorizationKey();
 
-  void saveSecureKey(List<int> key);
+  Future<void> saveSecureKey(List<int> key);
   Future<String?> getSecureKey();
 }

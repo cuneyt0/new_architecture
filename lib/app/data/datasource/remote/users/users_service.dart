@@ -8,7 +8,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../../core/getIt/injection.dart';
 import '../../../../../core/network/builder/network_manager.dart';
 
-@Injectable(as: IUsersService)
+@LazySingleton(as: IUsersService)
 class UsersService implements IUsersService {
   final client = getIt.get<NetworkManager>();
   @override
@@ -16,8 +16,8 @@ class UsersService implements IUsersService {
     final response = await client
         .setRequestMethod(requestMethodEnum: RequestMethodEnum.GET)
         .setPath(path: 'api/users')
-        .setQueryParameters(queryParameters: {'page': page})
-        .execute<Users, Users>(Users());
+        .setQueryParameters(
+            queryParameters: {'page': page}).execute<Users, Users>(Users());
     return response;
   }
 }

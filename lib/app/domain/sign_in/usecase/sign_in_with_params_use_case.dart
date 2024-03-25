@@ -5,7 +5,7 @@ import 'package:architecture/core/base/base_network_type_def.dart';
 import 'package:architecture/core/network/interfaces/base_use_case.dart';
 import 'package:injectable/injectable.dart';
 
-@Singleton()
+@LazySingleton()
 class SignInWithParamsUseCase
     implements BaseParamsUseCase<SignInEntity, QueryParameters> {
   final ISignInRepository iDomainSignInRepository;

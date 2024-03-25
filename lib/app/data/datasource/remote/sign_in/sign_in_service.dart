@@ -10,7 +10,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../../core/getIt/injection.dart';
 import '../../../../../core/network/builder/network_manager.dart';
 
-@Injectable(as: ISignInService)
+@LazySingleton(as: ISignInService)
 class SignInService implements ISignInService {
   final client = getIt.get<NetworkManager>();
 

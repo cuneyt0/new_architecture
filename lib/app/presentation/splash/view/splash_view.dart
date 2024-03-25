@@ -5,15 +5,10 @@ import 'package:architecture/core/theme/core/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import '../../../../core/getIt/injection.dart';
-
 class SplashView extends BaseView<SplashViewModel> {
-
   SplashView({super.key});
   @override
-  void dispose() {
-
-  }
+  void dispose() {}
 
   @override
   void init() async {
@@ -31,6 +26,4 @@ class SplashView extends BaseView<SplashViewModel> {
       ),
     );
   }
-
-
 }

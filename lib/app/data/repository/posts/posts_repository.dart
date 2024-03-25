@@ -6,7 +6,7 @@ import 'package:architecture/core/base/base_network_type_def.dart';
 import 'package:architecture/core/result/result.dart';
 import 'package:injectable/injectable.dart';
 
-@Injectable(as: IPostsRepository)
+@LazySingleton(as: IPostsRepository)
 class PostsRepository extends IPostsRepository {
   final IPostsService postsService;
   PostsRepository({required this.postsService});

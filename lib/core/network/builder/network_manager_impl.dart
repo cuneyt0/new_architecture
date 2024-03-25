@@ -17,7 +17,7 @@ import '../enum/request_method_enum.dart';
 import '../interceptors/authorization_interceptor.dart';
 import 'network_manager.dart';
 
-@Injectable(as: NetworkManager)
+@LazySingleton(as: NetworkManager)
 class NetworkManagerImpl extends NetworkManager {
   final Dio _dio = getIt.get<ThirdPartyManagers>().dio;
   final ApplicationLocalDataSource _userLocalDataSource =

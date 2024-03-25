@@ -8,7 +8,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../../core/network/builder/network_manager.dart';
 
-@Injectable(as: IPostsService)
+@LazySingleton(as: IPostsService)
 class PostsService extends IPostsService {
   final client = getIt.get<NetworkManager>();
 

@@ -10,11 +10,11 @@ import 'package:architecture/core/network/interfaces/base_use_case.dart';
 import 'package:architecture/core/result/result.dart';
 import 'package:injectable/injectable.dart';
 
-@Injectable(as: ISignInRepository)
+@LazySingleton(as: ISignInRepository)
 class SignInRepository implements ISignInRepository {
   final ISignInService iSignInService;
-  final ApplicationLocalDataSource applicationLocalDataSource = getIt.get<
-      ApplicationLocalDataSource>();
+  final ApplicationLocalDataSource applicationLocalDataSource =
+      getIt.get<ApplicationLocalDataSource>();
 
   SignInRepository({required this.iSignInService});
 
@@ -22,9 +22,13 @@ class SignInRepository implements ISignInRepository {
   ResultDecode<SignInEntity, BaseNetworkErrorType> signIn(
       {SignInRequestModel? data}) async {
     final result = await iSignInService.signIn(data: data);
-    result.when(success: (data)=>applicationLocalDataSource.saveAuthorizationKey(data.token ?? ""), failure: (fail)=>{});
+
     return result.when(
-        success: (data) => Result.success(data.mapToEntity()),
+        success: (data) async {
+          await applicationLocalDataSource
+              .saveAuthorizationKey(data.token ?? "");
+          return Result.success(data.mapToEntity());
+        },
         failure: (error) => Result.failure(error));
   }
 

@@ -1,7 +1,6 @@
 import 'package:architecture/app/data/model/request/sign_in_request_model/sign_in_request_model.dart';
 import 'package:architecture/app/data/model/response/sign_in/sign_in.dart';
 import 'package:architecture/app/domain/sign_in/entity/sign_in_entity.dart';
-import 'package:architecture/app/domain/sign_in/usecase/sign_in_with_params_use_case.dart';
 import 'package:architecture/app/domain/sign_in/usecase/sing_in_use_case.dart';
 import 'package:architecture/app/utilities/cache/cache_manager.dart';
 import 'package:architecture/core/base/viewmodel/base_viewmodel.dart';
@@ -14,12 +13,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 
-@Singleton()
+@LazySingleton()
 class SignInViewModel extends BaseViewModel {
-  final SignInWithParamsUseCase signInWithParamsUseCase;
   final SignInUseCase signInUseCase;
-  SignInViewModel(
-      {required this.signInWithParamsUseCase, required this.signInUseCase});
+  SignInViewModel({required this.signInUseCase});
   ViewState<SignInEntity, SwError> resultState = const ViewState.idle();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();

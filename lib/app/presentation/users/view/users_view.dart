@@ -14,8 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/getIt/injection.dart';
-
 part '../widgets/_appbar.dart';
 part '../widgets/_searchbody.dart';
 
@@ -23,9 +21,7 @@ class UsersView extends BaseView<UsersViewModel> {
   UsersView({super.key});
 
   @override
-  void dispose() {
-
-  }
+  void dispose() {}
 
   @override
   void init() {

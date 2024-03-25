@@ -15,12 +15,11 @@ abstract class BaseView<T extends BaseViewModel> extends StatefulWidget {
       ConnectivityController connectivity);
   void init();
   void dispose();
-  void resetViewModel(){
-    getIt.resetLazySingleton<T>();
-    viewModel.dispose();
+  Future<void> resetViewModel() async {
+    await getIt.resetLazySingleton<T>();
   }
-  BaseView({super.key});
 
+  BaseView({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -46,7 +45,7 @@ class _BaseViewState extends State<BaseView>
     super.dispose();
     debugPrint("Close -- $widget");
     if (mounted) {
-      widget.resetViewModel();
+      Future.microtask(() async => await widget.resetViewModel());
       widget.dispose();
     }
   }
