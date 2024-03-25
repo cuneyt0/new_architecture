@@ -7,6 +7,12 @@
 // ignore_for_file: type=lint
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
+class $LibGen {
+  const $LibGen();
+
+  $LibEnvironmentsGen get environments => const $LibEnvironmentsGen();
+}
+
 class $AssetsColorGen {
   const $AssetsColorGen();
 
@@ -30,9 +36,23 @@ class $AssetsLocalizableGen {
   List<String> get values => [en, tr];
 }
 
+class $LibEnvironmentsGen {
+  const $LibEnvironmentsGen();
+
+  /// File path: lib/environments/.env.development
+  String get envDevelopment => 'lib/environments/.env.development';
+
+  /// File path: lib/environments/.env.production
+  String get envProduction => 'lib/environments/.env.production';
+
+  /// List of all assets
+  List<String> get values => [envDevelopment, envProduction];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsColorGen color = $AssetsColorGen();
   static const $AssetsLocalizableGen localizable = $AssetsLocalizableGen();
+  static const $LibGen lib = $LibGen();
 }

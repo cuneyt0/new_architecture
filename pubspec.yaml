@@ -43,6 +43,7 @@ dependencies:
   go_router: ^13.2.1
   #Injectable
   injectable: ^2.3.5
+  flutter_dotenv: ^5.1.0
 
 
 
@@ -83,6 +84,8 @@ flutter:
     - assets/fonts/
     - assets/icons/
     - assets/localizable/
+    - lib/environments/.env.development
+    - lib/environments/.env.production
 
 
 
