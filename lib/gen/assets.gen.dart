@@ -45,8 +45,11 @@ class $LibEnvironmentsGen {
   /// File path: lib/environments/.env.production
   String get envProduction => 'lib/environments/.env.production';
 
+  /// File path: lib/environments/.env.staging
+  String get envStaging => 'lib/environments/.env.staging';
+
   /// List of all assets
-  List<String> get values => [envDevelopment, envProduction];
+  List<String> get values => [envDevelopment, envProduction, envStaging];
 }
 
 class Assets {

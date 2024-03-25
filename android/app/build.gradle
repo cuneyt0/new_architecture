@@ -75,6 +75,11 @@ android {
             applicationIdSuffix ".development"
             resValue "string", "app_name", "DEV"
         }
+        staging {
+            dimension "default"
+            applicationIdSuffix ".staging"
+            resValue "string", "app_name", "Staging"
+        }
         
         
     }

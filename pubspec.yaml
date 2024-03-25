@@ -86,6 +86,7 @@ flutter:
     - assets/localizable/
     - lib/environments/.env.development
     - lib/environments/.env.production
+    - lib/environments/.env.staging
 
 
 
