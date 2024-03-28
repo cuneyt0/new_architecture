@@ -2,6 +2,7 @@ enum AppRoutes {
   splashView('/splashView', 'SplashView'),
   signInView('/signInView', 'SignInView'),
   usersView('/usersView', 'UsersView'),
+  notificationView('/notificationView', 'NotificationView'),
   subUsersView(
     'subUsersView',
     'SubUsersView',

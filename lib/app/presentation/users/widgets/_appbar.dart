@@ -31,6 +31,16 @@ AppBar _appbar(UsersViewModel viewModel) {
                 ? const Icon(Icons.cancel_outlined)
                 : const Icon(Icons.search)),
       ),
+      InkWell(
+        onTap: () {
+          AppNavigation.navigatorKey.currentState?.context
+              .push(AppRoutes.notificationView.path);
+        },
+        child: const Padding(
+          padding: EdgeInsets.only(right: 8.0),
+          child: Icon(Icons.notifications),
+        ),
+      )
     ],
   );
 }

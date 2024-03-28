@@ -1,11 +1,11 @@
 // ignore_for_file: unused_element
-
 import 'package:architecture/app/component/no_connection_view.dart';
 import 'package:architecture/app/domain/posts/entity/posts_entity.dart';
 import 'package:architecture/app/domain/users/entity/users_entity.dart';
 import 'package:architecture/app/presentation/users/viewmodel/users_viewmodel.dart';
 import 'package:architecture/app/utilities/connectivity/connectivity_controller.dart';
 import 'package:architecture/core/base/view/base_view.dart';
+import 'package:architecture/core/navigation/app_navigation.dart';
 import 'package:architecture/core/navigation/app_routes.dart';
 import 'package:architecture/core/result_state_builder/result_state_builder.dart';
 import 'package:architecture/core/results/view_state.dart';

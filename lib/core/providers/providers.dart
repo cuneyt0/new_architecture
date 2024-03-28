@@ -1,8 +1,11 @@
+import 'package:architecture/app/presentation/notification/view/notification_view.dart';
+import 'package:architecture/app/presentation/notification/viewmodel/notification_viewmodel.dart';
 import 'package:architecture/app/presentation/sign_in/viewmodel/sign_in_viewmodel.dart';
 import 'package:architecture/app/presentation/splash/viewmodel/splash_viewmodel.dart';
 import 'package:architecture/app/presentation/users/viewmodel/users_viewmodel.dart';
 import 'package:architecture/app/utilities/connectivity/connectivity_controller.dart';
 import 'package:architecture/core/theme/core/theme_manager.dart';
+import 'package:architecture/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +25,9 @@ class Providers {
     ),
     ChangeNotifierProvider<SignInViewModel>(
       create: (BuildContext context) => getIt.get<SignInViewModel>(),
+    ),
+    ChangeNotifierProvider<NotificationViewModel>(
+      create: (BuildContext context) => getIt.get<NotificationViewModel>(),
     ),
   ];
 }

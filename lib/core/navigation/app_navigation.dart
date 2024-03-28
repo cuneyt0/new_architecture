@@ -1,4 +1,5 @@
 import 'package:architecture/app/domain/sign_in/entity/sign_in_data_entity.dart';
+import 'package:architecture/app/presentation/notification/view/notification_view.dart';
 import 'package:architecture/app/presentation/sign_in/view/sign_in_view.dart';
 import 'package:architecture/app/presentation/splash/view/splash_view.dart';
 import 'package:architecture/app/presentation/users/view/sub_sub_view.dart';
@@ -63,6 +64,14 @@ final class AppNavigation {
                   ),
                 ]),
           ]),
+      //NotificationView
+      GoRoute(
+        path: AppRoutes.notificationView.path,
+        name: AppRoutes.notificationView.name,
+        builder: (context, state) => NotificationView(
+          key: state.pageKey,
+        ),
+      ),
     ],
   );
 }
