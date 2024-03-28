@@ -38,8 +38,24 @@ class NotificationView extends BaseView<NotificationViewModel> {
                     children: [
                       //Notification box
                       NotificationBox(
-                        notificationMessage: "Merhaba ",
-                        title: "First Notification",
+                        notificationMessage: "Merhaba bu birinci bildirim ",
+                        title: "Notification1",
+                      ),
+                      NotificationBox(
+                        notificationMessage: "Merhaba bu ikinci bildirim ",
+                        title: "Notification2",
+                      ),
+                      NotificationBox(
+                        notificationMessage: "Merhaba bu üçüncü bildirim ",
+                        title: "Notification3",
+                      ),
+                      NotificationBox(
+                        notificationMessage: "Merhaba bu dördüncü bildirim ",
+                        title: "Notification4",
+                      ),
+                      NotificationBox(
+                        notificationMessage: "Merhaba bu beşinci bildirim ",
+                        title: "Notification5",
                       ),
                     ],
                   ),

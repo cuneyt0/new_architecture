@@ -49,9 +49,6 @@ dependencies:
   flutter_local_notifications: ^17.0.0
   flutter_tts: ^4.0.2
 
-  flutter_tts: ^4.0.2
-
-
 
 
 dev_dependencies:

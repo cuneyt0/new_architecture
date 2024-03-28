@@ -2,9 +2,12 @@
 
 import 'dart:developer';
 
+import 'package:architecture/core/navigation/app_navigation.dart';
+import 'package:architecture/core/navigation/app_routes.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:go_router/go_router.dart';
 
 final class CloudMessaging {
   final FirebaseMessaging _messaging = FirebaseMessaging.instance;
@@ -43,10 +46,12 @@ final class CloudMessaging {
           log('notification(${notificationResponse.id}) action tapped: '
               '${notificationResponse.actionId} with'
               ' payload: ${notificationResponse.payload}');
-          await flutterTts.setLanguage("en-TR");
+          await flutterTts.setLanguage("tr-TR");
           await flutterTts.setPitch(1);
           await flutterTts.setSpeechRate(0.5);
           await flutterTts.speak("${notificationResponse.payload}");
+          AppNavigation.navigatorKey.currentState?.context
+              .go(AppRoutes.notificationView.path);
         },
       );
   @pragma('vm:entry-point')
