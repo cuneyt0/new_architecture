@@ -4,10 +4,12 @@ import 'dart:developer';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 final class CloudMessaging {
   final FirebaseMessaging _messaging = FirebaseMessaging.instance;
   static final CloudMessaging instance = CloudMessaging();
+  FlutterTts flutterTts = FlutterTts();
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
@@ -31,9 +33,29 @@ final class CloudMessaging {
 
   //*Local Notification init.
   Future<void> _initializeLocalNotification() async =>
-      flutterLocalNotificationsPlugin.initialize(const InitializationSettings(
-          android: AndroidInitializationSettings('@mipmap/ic_launcher'),
-          iOS: DarwinInitializationSettings()));
+      flutterLocalNotificationsPlugin.initialize(
+        const InitializationSettings(
+            android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+            iOS: DarwinInitializationSettings()),
+        onDidReceiveNotificationResponse:
+            (NotificationResponse notificationResponse) async {
+          log('onDidReceiveNotificationResponse');
+          log('notification(${notificationResponse.id}) action tapped: '
+              '${notificationResponse.actionId} with'
+              ' payload: ${notificationResponse.payload}');
+          await flutterTts.setLanguage("en-TR");
+          await flutterTts.setPitch(1);
+          await flutterTts.setSpeechRate(0.5);
+          await flutterTts.speak("${notificationResponse.payload}");
+        },
+      );
+  @pragma('vm:entry-point')
+  void notificationTapBackground(NotificationResponse notificationResponse) {
+    print('notificationTapBackground');
+    print('notification(${notificationResponse.id}) action tapped: '
+        '${notificationResponse.actionId} with'
+        ' payload: ${notificationResponse.payload}');
+  }
 
   //Uygulama androidde foreground da bildirimin gelmesi için gerekli config. ayarı
   final AndroidNotificationChannel _androidNotificationChannel =
@@ -78,6 +100,7 @@ final class CloudMessaging {
     FirebaseMessaging.onMessage.listen(
       (message) async {
         final notification = message.notification;
+
         final android = message.notification?.android;
 
         if (message.notification != null) {
@@ -86,20 +109,31 @@ final class CloudMessaging {
             notification!.title,
             notification.body,
             NotificationDetails(
-              android: setAndroidNotificationDetail(icon: android?.smallIcon),
+              android: setAndroidNotificationDetail(
+                icon: android?.smallIcon,
+              ),
             ),
+            payload: '${notification.title} ${notification.body}',
           );
         }
       },
     );
   }
 
-  AndroidNotificationDetails setAndroidNotificationDetail({String? icon}) =>
+  AndroidNotificationDetails setAndroidNotificationDetail({
+    String? icon,
+  }) =>
       AndroidNotificationDetails(
         _androidNotificationChannel.id,
         _androidNotificationChannel.name,
         icon: icon,
+        importance: Importance.max,
+        actions: [
+          AndroidNotificationAction(_androidNotificationChannel.id, "Sesli Oku",
+              showsUserInterface: true),
+        ],
       );
+
   // * Uygulama Ölü iken çalışan notification
   Future<void> _terminatedNotification() async =>
       await _messaging.getInitialMessage();
