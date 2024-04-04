@@ -1,0 +1,20 @@
+# flow.yaml
+
+appId: com.aykac.architecture.development
+---
+
+- assertVisible: "Users"
+- takeScreenshot: MainScreen    
+- scroll
+- tapOn: "Michael"
+- back
+- tapOn:
+    text: "SearchButton"
+- tapOn: "Ne aramak istersiniz?"
+- inputText: "eve.holt@reqres.in"
+- pressKey: Back
+- stopRecording
+
+
+
+  

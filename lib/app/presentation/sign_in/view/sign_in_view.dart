@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 class SignInView extends BaseView<SignInViewModel> {
   SignInView({super.key});
 
-
   @override
   void dispose() {}
 
@@ -25,6 +24,11 @@ class SignInView extends BaseView<SignInViewModel> {
                 child: Column(
                   children: [
                     const Spacer(),
+                    const Expanded(
+                        child: Text(
+                      "Hello",
+                      style: TextStyle(fontSize: 40, color: Colors.black),
+                    )),
                     Expanded(
                       child: TextFormField(
                         controller: consumer.emailController,
@@ -38,11 +42,14 @@ class SignInView extends BaseView<SignInViewModel> {
                         decoration: const InputDecoration(hintText: "Şifre"),
                       ),
                     ),
-                    ElevatedButton(
-                        onPressed: () {
-                          consumer.signIn(context);
-                        },
-                        child: const Text("Giriş Yap")),
+                    Semantics(
+                      label: "Giriş Yap",
+                      child: ElevatedButton(
+                          onPressed: () {
+                            consumer.signIn(context);
+                          },
+                          child: const Text("Giriş Yap")),
+                    ),
                     const Spacer(),
                   ],
                 ),

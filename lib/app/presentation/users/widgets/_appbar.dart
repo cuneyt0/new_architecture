@@ -25,11 +25,14 @@ AppBar _appbar(UsersViewModel viewModel) {
     actions: [
       Selector<UsersViewModel, bool>(
         selector: (_, provider) => provider.isSearch,
-        builder: (context, value, child) => IconButton(
-            onPressed: () => viewModel.searchButtonOnTap(),
-            icon: viewModel.isSearch == true
-                ? const Icon(Icons.cancel_outlined)
-                : const Icon(Icons.search)),
+        builder: (context, value, child) => Semantics(
+          label: "SearchButton",
+          child: IconButton(
+              onPressed: () => viewModel.searchButtonOnTap(),
+              icon: viewModel.isSearch == true
+                  ? const Icon(Icons.cancel_outlined)
+                  : const Icon(Icons.search)),
+        ),
       ),
       InkWell(
         onTap: () {

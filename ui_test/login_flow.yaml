@@ -1,0 +1,18 @@
+# flow.yaml
+
+appId: com.aykac.architecture.development
+---
+- launchApp
+- startRecording: name
+- assertVisible: "Hello"
+- tapOn: "Kullanıcı Adı"
+- inputText: "eve.holt@reqres.in"
+- hideKeyboard
+- tapOn: "Şifre"
+- inputText: "cityslicka"
+- hideKeyboard
+- tapOn: 
+    text: "Giriş Yap"
+    repeat: 1
+- assertNotVisible: "Missing email or username" 
+- runFlow: users_flow.yaml

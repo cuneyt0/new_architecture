@@ -12,9 +12,9 @@ class SplashViewModel extends BaseViewModel {
     SignIn? user = _checkUser();
     user == null
         ? AppNavigation.navigatorKey.currentState?.context
-            .goNamed(AppRoutes.usersView.name)
+            .goNamed(AppRoutes.signInView.name)
         : AppNavigation.navigatorKey.currentState?.context
-            .goNamed(AppRoutes.usersView.name);
+            .goNamed(AppRoutes.signInView.name);
   }
 
   SignIn? _checkUser() {
